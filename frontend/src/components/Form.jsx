@@ -5,9 +5,14 @@ const Form = ({
     updateBook,
     deleteBook,
 }) => {
+    const disableSaveNewButton =
+        !selectedBook || !selectedBook.title || !selectedBook.author;
     const disableSaveButton =
-        selectedBook.title === undefined ||
-        selectedBook.author === undefined;
+        !selectedBook.id ||
+        !selectedBook ||
+        !selectedBook.title ||
+        !selectedBook.author;
+
     return (
         <div className="form-container">
             <form>
@@ -51,14 +56,14 @@ const Form = ({
                 </label>
                 <div className="button-container">
                     <button
-                        disabled={disableSaveButton}
+                        disabled={disableSaveNewButton}
                         type="submit"
                         onClick={addBook}
                     >
                         Save new
                     </button>
                     <button
-                        disabled={selectedBook.id === undefined}
+                        disabled={disableSaveButton}
                         type="submit"
                         onClick={updateBook}
                     >
